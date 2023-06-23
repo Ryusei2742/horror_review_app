@@ -1,0 +1,10 @@
+<h1>ホラー映画レビューサイト</h1>
+
+<p>こんにちは <%= @user.name %>さん,</p>
+
+<p>
+登録ありがとうございます。下記のリンクを押してアカウントを有効化してください。
+</p>
+
+<%= link_to "有効化", edit_account_activation_url(@user.activation_token,
+                                                    email: @user.email) %>
