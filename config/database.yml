@@ -86,6 +86,6 @@ test:
 #   password: <%= ENV["HORROR_REVIEW_APP_DATABASE_PASSWORD"] %>
 production:
   <<: *default
-  adapter: postgresql
+  adapter: postgresql@14
   encoding: unicode
   url: <%= ENV['DATABASE_URL'] %>
