@@ -1,0 +1,15 @@
+<% provide(:title, @movie.title) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="movie_info">
+      <h1>
+        <%= @movie.title %>
+      </h1>
+      <h2>
+        <%= @movie.category %>
+        <%= @movie.director %>
+        <%= @movie.rating %>
+      </h2>
+    </section>
+  </aside>
+</div>
