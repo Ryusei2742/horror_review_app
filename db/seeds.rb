@@ -36,6 +36,6 @@ followers.each { |follower| follower.follow(user) }
 
 # 映画登録
 Movie.create!(title:       "呪怨2",
-              category:    "心霊",
+              genre:    "心霊",
               director:    "清水崇",
               rating:      "5")

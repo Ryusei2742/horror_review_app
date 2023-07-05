@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  get '/movies/search' => 'movies#search'
+  delete '/movies/:id' => 'movies#destroy'
   get 'movies/new'
+  get '/movies/:id' => 'movies#show'
   get 'password_resets/new'
   get 'password_resets/edit'
   root   "static_pages#home"

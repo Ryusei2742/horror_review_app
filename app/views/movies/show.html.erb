@@ -2,14 +2,15 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="movie_info">
-      <h1>
-        <%= @movie.title %>
-      </h1>
-      <h2>
-        <%= @movie.category %>
-        <%= @movie.director %>
-        <%= @movie.rating %>
-      </h2>
+      <h1><%= @movie.title %></h1>
+      <p>ジャンル: <%= @movie.genre %></p>
+      <p>監督: <%= @movie.director %></p>
+      <p>キャスト: <%= @movie.cast %></p>
+      <p>評価: <%= @movie.rating %></p>
+      <!-- その他の映画の属性を表示 -->
+      <%= button_to '映画削除', movie_path(@movie), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+
+
     </section>
   </aside>
 </div>

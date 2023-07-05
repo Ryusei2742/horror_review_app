@@ -14,8 +14,14 @@ class MoviesController < ApplicationController
 
   def destroy
     Movie.find(params[:id]).destroy
+    @movie.destroy
     flash[:success] = "削除しました"
     redirect_to movies_url, status: :see_other
+  end
+
+  def search
+    @query = params[:query]
+    @movies = Movie.where('title LIKE ?', "%#{@query}%")   #title カラムを部分一致で検索している
   end
 
   private

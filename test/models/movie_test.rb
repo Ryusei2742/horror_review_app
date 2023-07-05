@@ -2,7 +2,7 @@ require "test_helper"
 
 class MovieTest < ActiveSupport::TestCase
   def setup
-    @movie = Movie.new(title: "Example User", category: "Example",
+    @movie = Movie.new(title: "Example User", genre: "Example",
                        director: "Example", rating: "3")
   end
 
@@ -15,8 +15,8 @@ class MovieTest < ActiveSupport::TestCase
     assert_not @movie.valid?
   end
 
-  test "category should be present" do
-    @movie.category = "     "
+  test "genre should be present" do
+    @movie.genre = "     "
     assert_not @movie.valid?
   end
 
