@@ -20,8 +20,34 @@ class MoviesController < ApplicationController
   end
 
   def search
-    @query = params[:query]
-    @movies = Movie.where('title LIKE ?', "%#{@query}%")   #title カラムを部分一致で検索している
+    @keyword = params[:keyword]
+    @genre = params[:genre]
+    @director = params[:director]
+    @cast = params[:cast]
+
+    @movies  = Movie.all
+
+    if @keyword.present? || @genre.present? || @director.present? || @cast.present?
+      @movies = Movie.all
+
+      if @keyword.present?
+        @movies = @movies.where('title LIKE ?', "%#{@keyword}%")
+      end
+
+      if @genre.present?
+        @movies = @movies.where(genre: @genre)
+      end
+
+      if @director.present?
+        @movies = @movies.where(director: @director)
+      end
+
+      if @cast.present?
+        @movies = @movies.where(cast: @cast)
+      end
+    else
+      @movies = []
+    end
   end
 
   private

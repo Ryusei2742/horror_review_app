@@ -1,0 +1,24 @@
+<%= form_with(url: '/movies/search', method: 'get') do |form| %>
+  <%= form.text_field :keyword, placeholder: 'キーワード' %>
+  <%= form.text_field :genre, placeholder: 'ジャンル' %>
+  <%= form.text_field :director, placeholder: '監督' %>
+  <%= form.text_field :cast, placeholder: '俳優' %>
+  <%= form.submit '検索' %>
+<% end %>
+
+<% if @keyword || @genre || @director || @cast.present? %>
+  <h1>検索結果</h1>
+
+  <% if @movies.any? %>
+    <%# <h1>検索結果</h1> %>
+    <ul>
+      <% @movies.each do |movie| %>
+        <li>
+          <%= link_to movie.title, movie_path(movie) %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>該当する映画が見つかりませんでした。</p>
+  <% end %>
+<% end %>
