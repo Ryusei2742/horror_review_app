@@ -1,0 +1,10 @@
+<% provide(:title, 'All movies') %>
+<h1>映画一覧</h1>
+
+<%= will_paginate @movies, :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
+
+<ul class="movies">
+  <%= render @movies %>
+</ul>
+
+<%= will_paginate @movies, :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
