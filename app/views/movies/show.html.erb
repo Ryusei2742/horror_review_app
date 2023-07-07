@@ -8,9 +8,15 @@
       <p>キャスト: <%= @movie.cast %></p>
       <p>評価: <%= @movie.rating %></p>
       <!-- その他の映画の属性を表示 -->
-      <%= button_to '映画削除', movie_path(@movie), method: :delete, data: { confirm: '本当に削除しますか？' } %>
-
-
     </section>
   </aside>
+
+      <h2>レビューを書く</h2>
+      <%= form_with(model: @movie_review, url: movie_reviews_path, method: :post) do |form| %>
+        <%= form.text_area :content, placeholder: 'レビュー内容' %>
+        <%= form.number_field :rating, placeholder: '評価値' %>
+        <%= form.hidden_field :movie_id, value: @movie.id %>
+        <%= form.submit '投稿' %>
+      <% end %>
+
 </div>

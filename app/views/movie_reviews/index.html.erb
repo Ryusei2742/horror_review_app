@@ -1,0 +1,8 @@
+<h1>レビュー一覧</h1>
+<ul>
+  <% @movie_review.each do |review| %>
+    <li>
+      <%= link_to review.content, movie_review_path(review) %>
+    </li>
+  <% end %>
+</ul>

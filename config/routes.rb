@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'movie_reviews/new'
   get '/movies/search' => 'movies#search'
   delete '/movies/:id' => 'movies#destroy'
   get 'movies/new'
@@ -24,5 +25,6 @@ Rails.application.routes.draw do
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
   resources :movies
+  resources :movie_reviews, only: [:create, :show, :index, :edit, :destroy]
   get '/microposts', to: 'static_pages#home'
 end
