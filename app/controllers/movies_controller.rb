@@ -3,7 +3,7 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
-    @review = MovieReview.new
+    @reviews = @movie.movie_reviews.order(created_at: :desc)
   end
 
   def index

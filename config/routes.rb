@@ -26,5 +26,8 @@ Rails.application.routes.draw do
   resources :relationships,       only: [:create, :destroy]
   resources :movies
   resources :movie_reviews, only: [:create, :show, :index, :edit, :destroy]
+  resources :users do
+    resources :movie_reviews, only: [:index]
+  end
   get '/microposts', to: 'static_pages#home'
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_06_043826) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_08_043531) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -57,7 +57,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_06_043826) do
     t.bigint "movie_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.string "title"
     t.index ["movie_id"], name: "index_movie_reviews_on_movie_id"
+    t.index ["user_id"], name: "index_movie_reviews_on_user_id"
   end
 
   create_table "movies", force: :cascade do |t|
@@ -110,5 +113,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_06_043826) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "microposts", "users"
   add_foreign_key "movie_reviews", "movies"
+  add_foreign_key "movie_reviews", "users"
   add_foreign_key "reviews", "movies"
 end

@@ -1,8 +1,11 @@
 <h1>レビュー一覧</h1>
-<ul>
-  <% @movie_review.each do |review| %>
-    <li>
-      <%= link_to review.content, movie_review_path(review) %>
-    </li>
-  <% end %>
-</ul>
+
+<% @movie_reviews.each do |review| %>
+  <div class="review">
+    <h2><%= review.title %></h2>
+    <p><%= review.content %></p>
+    <p>評価: <%= review.rating %></p>
+    <p>投稿者: <%= review.user.name %></p>
+    <!-- その他のレビューの情報を表示 -->
+  </div>
+<% end %>
