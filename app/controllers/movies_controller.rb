@@ -3,18 +3,16 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
-    @reviews = @movie.movie_reviews.order(created_at: :desc)
+    @reviews = @movie.movie_reviews
+    @average_rating = @reviews.average(:rating)
   end
 
   def index
     @movies = Movie.paginate(page: params[:page], per_page: 10)
   end
 
-  def new
-  end
-
   def destroy
-    Movie.find(params[:id]).destroy
+    @movie = Movie.find(params[:id]).destroy
     @movie.destroy
     flash[:success] = "削除しました"
     redirect_to movies_url, status: :see_other

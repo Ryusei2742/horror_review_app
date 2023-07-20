@@ -1,0 +1,5 @@
+<%= form_with(model: @movie_review, url: movie_review_path(@movie_review), method: :patch) do |form| %>
+  <%= form.text_area :content, placeholder: 'レビュー内容' %>
+  <%= form.number_field :rating, placeholder: '評価値' %>
+  <%= form.submit '更新' %>
+<% end %>

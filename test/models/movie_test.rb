@@ -2,8 +2,7 @@ require "test_helper"
 
 class MovieTest < ActiveSupport::TestCase
   def setup
-    @movie = Movie.new(title: "Example User", genre: "Example",
-                       director: "Example", rating: "3")
+    @movie = Movie.new(title: "Sample Movie", genre: "Action", director: "John Doe", rating: 4)
   end
 
   test "should be valid" do

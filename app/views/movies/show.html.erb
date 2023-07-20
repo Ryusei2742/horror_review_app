@@ -6,10 +6,20 @@
       <p>ジャンル: <%= @movie.genre %></p>
       <p>監督: <%= @movie.director %></p>
       <p>キャスト: <%= @movie.cast %></p>
-      <p>評価: <%= @movie.rating %></p>
+      <p>評価: <%= @average_rating %></p>
       <!-- その他の映画の属性を表示 -->
     </section>
   </aside>
+
+  <h2>レビューを書く</h2>
+      <%= form_with(model: MovieReview.new, url: movie_reviews_path, method: :post) do |form| %>
+        <%= form.text_area :content, placeholder: 'レビュー内容' %>
+        <%= form.number_field :rating, in: 1..5, placeholder: '評価値' %>
+        <%= form.hidden_field :movie_id, value: @movie.id %>
+        <%= form.hidden_field :movie_title, value: @movie.title %>
+        <%= form.hidden_field :user_id, value: current_user.id %>
+        <%= form.submit '投稿' %>
+      <% end %>
 
   <h2>レビュー一覧</h2>
 <% if @reviews.present? %>
@@ -20,6 +30,7 @@
         <%= review.content %>
         <p>評価: <%= review.rating %></p>
         <p>投稿者: <%= review.user.name %></p>
+        <%= link_to '編集', edit_movie_review_path(review) %>
         <!-- 他のレビューの属性を表示 -->
       </li>
     <% end %>
@@ -27,16 +38,5 @@
 <% else %>
   <p>まだレビューはありません。</p>
 <% end %>
-
-
-      <h2>レビューを書く</h2>
-      <%= form_with(model: @movie_review, url: movie_reviews_path, method: :post) do |form| %>
-        <%= form.text_area :content, placeholder: 'レビュー内容' %>
-        <%= form.number_field :rating, placeholder: '評価値' %>
-        <%= form.hidden_field :movie_id, value: @movie.id %>
-        <%= form.hidden_field :movie_title, value: @movie.title %>
-        <%= form.hidden_field :user_id, value: current_user.id %>
-        <%= form.submit '投稿' %>
-      <% end %>
 
 </div>

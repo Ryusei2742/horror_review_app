@@ -6,6 +6,7 @@
     <p><%= review.content %></p>
     <p>評価: <%= review.rating %></p>
     <p>投稿者: <%= review.user.name %></p>
+    <p>投稿された映画：<%= link_to review.movie.title, movie_path(review.movie) %></p>
     <!-- その他のレビューの情報を表示 -->
   </div>
 <% end %>
