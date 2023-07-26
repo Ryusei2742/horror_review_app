@@ -55,12 +55,12 @@ movies = [
   { title: "サイコ", genre: "人怖", director: "アルフレッド・ヒッチコック", cast: "アンソニー・パーキンス ジャネット・リー" },
   { title: "サイコ2", genre: "人怖", director: "	リチャード・フランクリン", cast: "アンソニー・パーキンス ヴェラ・マイルズ" },
   { title: "サイコ3/怨霊の囁き", genre: "人怖", director: "アンソニー・パーキンス", cast: "アンソニー・パーキンス ダイアナ・スカーウィッド" },
-  { title: "ミスト", genre: "SFホラー", director: "	フランク・ダラボン", cast: "トーマス・ジェーン ローリー・ホールデン" },
-  { title: "", genre: "", director: "", cast: "" },
-  { title: "", genre: "", director: "", cast: "" },
-  { title: "", genre: "", director: "", cast: "" },
-  { title: "", genre: "", director: "", cast: "" },
-  { title: "", genre: "", director: "", cast: "" },
+  { title: "ミスト", genre: "SFホラー", director: "	フランク・ダラボン", cast: "トーマス・ジェーン ローリー・ホールデン" }
+  # { title: "", genre: "", director: "", cast: "" },
+  # { title: "", genre: "", director: "", cast: "" },
+  # { title: "", genre: "", director: "", cast: "" },
+  # { title: "", genre: "", director: "", cast: "" },
+  # { title: "", genre: "", director: "", cast: "" },
 ]
 # データベースに映画情報を登録
 movies.each do |movie_info|
