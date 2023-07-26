@@ -1,5 +1,7 @@
 class MovieReviewsController < ApplicationController
   before_action :require_login, only: [:create, :edit, :update, :destroy]
+  before_action :set_movie_review, only: [:edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def create
     @movie_review = MovieReview.new(movie_review_params)
@@ -53,6 +55,17 @@ private
   def require_login
     unless current_user
       redirect_to login_path, alert: 'ログインしてください。'
+    end
+  end
+
+  def set_movie_review
+    @movie_review = MovieReview.find(params[:id])
+  end
+
+  def correct_user
+    unless @movie_review.user == current_user
+      flash[:danger] = "このレビューの編集・削除は許可されていません。"
+      redirect_to movie_path(@movie_review.movie)
     end
   end
 end

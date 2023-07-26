@@ -19,33 +19,13 @@ class MoviesController < ApplicationController
   end
 
   def search
-    @keyword = params[:keyword]
-    @genre = params[:genre]
-    @director = params[:director]
-    @cast = params[:cast]
-
-    @movies  = Movie.all
-
-    if @keyword.present? || @genre.present? || @director.present? || @cast.present?
-      @movies = Movie.all
-
-      if @keyword.present?
-        @movies = @movies.where('title LIKE ?', "%#{@keyword}%")
-      end
-
-      if @genre.present?
-        @movies = @movies.where(genre: @genre)
-      end
-
-      if @director.present?
-        @movies = @movies.where(director: @director)
-      end
-
-      if @cast.present?
-        @movies = @movies.where(cast: @cast)
-      end
+    if params[:search].present?
+      keywords = "%#{params[:search]}%"
+      # 検索条件に基づいて映画を検索する
+      @movies = Movie.where("title LIKE ? OR genre LIKE ? OR director LIKE ? OR cast LIKE ?", keywords, keywords, keywords, keywords)
     else
-      @movies = []
+      # 検索条件が指定されていない場合は全ての映画を表示する
+      @movies = Movie.all
     end
   end
 

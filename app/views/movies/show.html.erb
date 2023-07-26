@@ -30,8 +30,9 @@
         <%= review.content %>
         <p>評価: <%= review.rating %></p>
         <p>投稿者: <%= review.user.name %></p>
-        <%= link_to '編集', edit_movie_review_path(review) %>
-        <!-- 他のレビューの属性を表示 -->
+        <% if logged_in? && @movie_review && @movie_review.user == current_user %>
+          <%= link_to "編集", edit_movie_review_path(review) %>
+        <% end %>
       </li>
     <% end %>
   </ul>
