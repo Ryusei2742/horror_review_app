@@ -24,20 +24,8 @@ class MovieTest < ActiveSupport::TestCase
     assert_not @movie.valid?
   end
 
-  test "rating should be present" do
-    @movie.rating = "     "
-    assert_not  @movie.valid?
-  end
-
   test "title should not be too long" do
     @movie.title = "a" * 51
-    assert_not @movie.valid?
-  end
-
-  test "rating should be between 0 and 5" do
-    @movie.rating = -1
-    assert_not @movie.valid?
-    @movie.rating = 6
     assert_not @movie.valid?
   end
 

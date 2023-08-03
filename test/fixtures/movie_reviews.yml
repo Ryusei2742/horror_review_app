@@ -4,7 +4,6 @@ movie_review_1:
   movie: movie1
   user: michael
   title: "映画レビュー1"
-  # movie_title: "呪怨2"
 
 movie_review_2:
   content: "感動的なストーリーでした。"
@@ -12,4 +11,13 @@ movie_review_2:
   movie: movie1
   user: michael
   title: "映画レビュー2"
-  # movie_title: "呪怨2"
+
+movie_review_3:
+  content: "感動的なストーリーでした。
+            面白かった。
+            またみたい。
+            怖かった。"
+  rating: 4
+  movie: movie1
+  user: michael
+  title: "映画レビュー2"

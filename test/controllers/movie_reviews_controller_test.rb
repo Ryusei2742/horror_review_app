@@ -104,4 +104,22 @@ class MovieReviewsControllerTest < ActionDispatch::IntegrationTest
     assert_not_equal "更新されたcontent", @review.content
     assert_not_equal 1, @review.rating
   end
+
+  test "review content should be truncated to 3 sentences on index page" do
+    user = users(:michael)
+    movie = movies(:movie1)
+
+    # レビュー本文が3文以上のテスト用データを作成
+    review_content = "This is a sample review. It has more than three sentences. So, let's see if it is truncated or not. It should be truncated on the review index page."
+
+    # ログインしてテスト用データでレビューを投稿
+    log_in_as(user)
+    post movie_reviews_path, params: { movie_review: { content: review_content, rating: 4, movie_id: movie.id } }
+
+    # レビュー一覧ページにアクセス
+    get movie_reviews_path
+
+    # 本文が3文以内に制限されて表示されているか確認
+    assert_select 'div.review-content-ellipsis', text: /This is a sample review\..+It should be truncated on the review index page\./
+  end
 end

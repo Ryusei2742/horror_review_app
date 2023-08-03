@@ -1,6 +1,9 @@
 <h1>レビュー詳細</h1>
-<p><%= @movie_review.content %></p>
-<p>評価値: <%= @movie_review.rating %></p>
+<div>
+  <p class="review-content-full"><%= simple_format(@movie_review.content) %></p>
+</div>
+<p>評価: <%= display_rating(@movie_review.rating) %></p>
+<p>投稿者: <%= @movie_review.user.name %></p>
 <p>投稿された映画：<%= link_to @movie_review.movie.title, movie_path(@movie_review.movie) %></p>
 <% if logged_in? && @movie_review && @movie_review.user == current_user %>
   <%= link_to "編集", edit_movie_review_path(@movie_review) %>

@@ -6,38 +6,51 @@
       <p>ジャンル: <%= @movie.genre %></p>
       <p>監督: <%= @movie.director %></p>
       <p>キャスト: <%= @movie.cast %></p>
-      <p>評価: <%= @average_rating %></p>
-      <!-- その他の映画の属性を表示 -->
+      <p>評価: <%= display_rating(@average_rating) %></p>
     </section>
   </aside>
 
   <h2>レビューを書く</h2>
       <%= form_with(model: MovieReview.new, url: movie_reviews_path, method: :post) do |form| %>
-        <%= form.text_area :content, placeholder: 'レビュー内容' %>
-        <%= form.number_field :rating, in: 1..5, placeholder: '評価値' %>
-        <%= form.hidden_field :movie_id, value: @movie.id %>
-        <%= form.hidden_field :movie_title, value: @movie.title %>
-        <%= form.hidden_field :user_id, value: current_user.id %>
-        <%= form.submit '投稿' %>
-      <% end %>
+        <div class="field">
+          <%= form.text_area :content, placeholder: 'レビュー内容' %>
+          <%= form.number_field :rating, in: 1..5, placeholder: '評価値' %>
+          <%= form.label :spoiler, class: 'checkbox-label' do %>
+            <%= form.check_box :spoiler %>
+            ネタバレを含む
+          <% end %>
+          <%= form.hidden_field :movie_id, value: @movie.id %>
+          <%= form.hidden_field :movie_title, value: @movie.title %>
+          <%= form.hidden_field :user_id, value: current_user.id %>
+        </div>
+        <div class="actions">
+          <%= form.submit '投稿' %>
+        </div>
+        <% end %>
 
   <h2>レビュー一覧</h2>
 <% if @reviews.present? %>
-  <ul>
     <% @reviews.each do |review| %>
-      <li>
-        <%= review.title %>
-        <%= review.content %>
-        <p>評価: <%= review.rating %></p>
+        <div class="review-content">
+          <div class="review-body">
+          <% if review.spoiler? %>
+            <p class="spoiler-label" data-review-id="<%= review.id %>">
+              このレビューはネタバレを含みます。クリックして全文を見る
+            </p>
+            <p class="review-full-content" style="display: none;"><%= simple_format(review.content) %></p>
+          <% else %>
+            <div class="review-content-ellipsis"><%= simple_format(review.content) %></div>
+            <div class="review-content-full"><%= simple_format(review.content) %></div>
+          <% end %>
+          </div>
+        <p>評価: <%= display_rating(review.rating) %></p>
         <p>投稿者: <%= review.user.name %></p>
         <% if logged_in? && @movie_review && @movie_review.user == current_user %>
           <%= link_to "編集", edit_movie_review_path(review) %>
         <% end %>
-      </li>
     <% end %>
-  </ul>
 <% else %>
   <p>まだレビューはありません。</p>
+      </div>
 <% end %>
-
 </div>

@@ -324,3 +324,49 @@ span.image {
     border-bottom: 1px solid $gray-lighter;
   }
 }
+
+// movie_reviews
+.review-content {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.review-content .review-content-ellipsis,
+  .review-content.show-full .review-content-full {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* 表示行数を3行に制限 */
+  }
+
+  .review-content .review-content-full {
+    display: none;
+  }
+
+  .review-content.show-full .review-content-ellipsis {
+    display: none;
+  }
+
+  .review-content.show-full .review-content-full {
+    display: -webkit-box;
+    -webkit-line-clamp: unset; /* 全文表示のために行数の制限を解除 */
+    margin-top: 10px;
+  }
+
+  .rating {
+    color: gold; /* イエローの星で表示 */
+    font-size: 40px; /* 星マークのサイズを調整 */
+    line-height: 2; /* 行間を無効にして、文章と星マークがずれないようにする */
+  }
+
+  textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+  }
