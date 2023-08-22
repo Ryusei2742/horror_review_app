@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
   const spoilerLabels = document.querySelectorAll('.spoiler-label');
-
   spoilerLabels.forEach(function(label) {
     label.addEventListener('click', function() {
       const reviewId = label.dataset.reviewId;

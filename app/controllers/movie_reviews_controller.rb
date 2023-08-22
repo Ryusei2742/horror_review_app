@@ -49,7 +49,7 @@ class MovieReviewsController < ApplicationController
 private
 
   def movie_review_params
-    params.require(:movie_review).permit(:content, :rating, :movie_id, :user_id, :movie_title, :movie_review_id)
+    params.require(:movie_review).permit(:content, :rating, :movie_id, :user_id, :movie_title, :movie_review_id, :spoiler)
   end
 
   def require_login

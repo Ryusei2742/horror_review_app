@@ -1,0 +1,29 @@
+<%# 成功メッセージとエラーメッセージを表示 %>
+<% if flash[:success].present? %>
+  <div class="alert alert-success">
+    <%= flash[:success] %>
+  </div>
+<% end %>
+
+<% if flash[:error].present? %>
+  <div class="alert alert-danger">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+<%# メッセージ作成フォーム %>
+<%= form_with(model: Message.new, url: messages_path, method: :post) do |form| %>
+  <div class="field">
+    <%= form.label :recipient_id, "受信者" %>
+    <%= form.select :recipient_id, options_for_select(@users), prompt: "選択してください" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content, "メッセージ内容" %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "メッセージを送信" %>
+  </div>
+<% end %>

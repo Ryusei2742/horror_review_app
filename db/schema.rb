@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_03_052057) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_18_054805) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_03_052057) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.bigint "sender_id"
+    t.bigint "recipient_id"
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["recipient_id"], name: "index_messages_on_recipient_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "microposts", force: :cascade do |t|
@@ -73,6 +83,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_03_052057) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "cast"
+    t.float "average_rating"
     t.index ["title"], name: "index_movies_on_title", unique: true
   end
 
@@ -113,6 +124,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_03_052057) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "messages", "users", column: "recipient_id"
+  add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "microposts", "users"
   add_foreign_key "movie_reviews", "movies"
   add_foreign_key "movie_reviews", "users"

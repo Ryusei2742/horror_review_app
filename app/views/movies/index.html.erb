@@ -7,4 +7,32 @@
   <%= render @movies %>
 </ul>
 
+<%= form_with(url: movies_path, method: :get) do |form| %>
+  <div class="field">
+    <%= form.label :director, "監督" %>
+    <%= form.select :director, options_for_select(@directors), prompt: "すべての監督" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :genre, "ジャンル" %>
+    <%= form.select :genre, options_for_select(@genres), prompt: "すべてのジャンル" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cast, "キャスト" %>
+    <%= form.select :cast, options_for_select(@casts), prompt: "すべてのキャスト" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :order_by, "並び替え" %>
+    <%= form.select :order_by, options_for_select({ '評価順' => '評価順' }), prompt: "並び替えオプション" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "絞り込む" %>
+  </div>
+<% end %>
+
+
+
 <%= will_paginate @movies, :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>

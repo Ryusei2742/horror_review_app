@@ -8,7 +8,26 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.paginate(page: params[:page], per_page: 10)
+    @movies = Movie.filtered_and_ordered(params).paginate(page: params[:page], per_page: 10)
+    @directors = Movie.distinct.pluck(:director).sort_by(&:to_s)
+    @genres = Movie.distinct.pluck(:genre).sort_by(&:to_s)
+    @casts = Movie.distinct.pluck(:cast).sort_by(&:to_s)
+
+    if params[:director].present?
+      @movies = @movies.by_director(params[:director])
+    end
+
+    if params[:genre].present?
+      @movies = @movies.by_genre(params[:genre])
+    end
+
+    if params[:cast].present?
+      @movies = @movies.by_cast(params[:cast])
+    end
+
+    if params[:order_by] == 'rating'
+      @movies = @movies.order(average_rating: :desc)
+    end
   end
 
   def destroy
